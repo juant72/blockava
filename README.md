@@ -1,1 +1,1 @@
-# blockava Blockchain RUST
+# blockava is a blockchain built with Rust
