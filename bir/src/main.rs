@@ -5,7 +5,7 @@ fn main() {
 
     let mut block = Block::new(
         0, 
-        0,  
+        now(),
         vec![0;32],
         0,
         "Genesis block!".to_owned(),
@@ -21,29 +21,28 @@ fn main() {
         blocks: vec![block],
     };
 
-    for i in 1..=10 {
+    println!("Verify: {}", &blockchain.verify());
+
+    for _i in 1..=10 {
         let mut block = Block::new(
-            0, 
-            0,  
+            _i, 
+            now(),  
             last_hash,
             0,
             "Another block".to_owned(),
             difficulty
         );
-    
+
         block.mine();
-        
         println!("Mined block {:?}", &block);
-        
+
         last_hash=block.hash.clone();
 
         blockchain.blocks.push(block);
-    }
-    // let h= block.hash();
-    // println!("{:?}", &h);
 
-    // block.hash=h;
-    // print!("{:?}", &block);
+        println!("Verify: {}", &blockchain.verify());
+
+    }
 
 
 }
