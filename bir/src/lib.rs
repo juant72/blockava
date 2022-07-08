@@ -1,5 +1,4 @@
 type Hash=Vec<u8>;
-type BlockHash=Vec<u8>;
 type Address=String;
 
 use std::time::{ SystemTime, UNIX_EPOCH};
