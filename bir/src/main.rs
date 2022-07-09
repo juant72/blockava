@@ -3,22 +3,36 @@ use blockchainlib::*;
 fn main() {
     let difficulty=0x00ffffffffffffffffffffffffffffff;
 
-    let mut block = Block::new(
+    let mut genesis_block = Block::new(
         0, 
         now(),
         vec![0;32],
-        0,
-        "Genesis block!".to_owned(),
+        vec![
+            Transaction{
+                inputs: vec![],
+                outputs: vec![
+                    transaction::Output{
+                        to_addr: "Alice".to_owned(),
+                        value: 50,
+                    },
+                    transaction::Output{
+                        to_addr: "Bob".to_owned(),
+                        value: 7,
+                    },
+                ]
+
+        }
+        ],
         difficulty
     );
 
-    block.mine();
-    println!("Mined genesis block {:?}", &block);
+    genesis_block.mine();
+    println!("Mined genesis block {:?}", &genesis_block);
 
-    let mut last_hash=block.hash.clone();
+    let mut last_hash=genesis_block.hash.clone();
 
     let mut blockchain = Blockchain{
-        blocks: vec![block],
+        blocks: vec![genesis_block],
     };
 
     println!("Verify: {}", &blockchain.verify());
